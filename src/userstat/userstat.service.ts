@@ -12,7 +12,7 @@ export class UserstatService {
     async create(user: createUserDTO) {
         // console.log(user);
         const newUser = this.userstatModel(user);
-        return await newUser.save({ validateBeforeSave: false });
+        return await newUser.save();
     }
 
     async findByStatus(): Promise<userStat[]> {
