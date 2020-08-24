@@ -16,7 +16,7 @@ export class UserstatService {
     }
 
     async findAll(): Promise<createUserDTO[]> {
-        return await this.userstatModel.find().select('-_id -__v').exec();
+        return await this.userstatModel.find();
     }
 
     async findByStatus(): Promise<createUserDTO[]> {

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseInterceptors, ClassSerializerInterceptor, SerializeOptions } from '@nestjs/common';
 import { UserstatService } from './userstat.service';
 import { createUserDTO } from './dto/create-user.dto';
 import { userStat } from './interfaces/userstat.interface';
@@ -18,6 +18,7 @@ export class UserstatController {
     }
 
     @UseInterceptors(ClassSerializerInterceptor)
+    @SerializeOptions({ excludePrefixes: ['_'], })
     @Get('/showall')
     async findAll(): Promise<createUserDTO> {
         var ans = await this.userstatService.findAll();
