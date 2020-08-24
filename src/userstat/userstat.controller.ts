@@ -2,7 +2,6 @@ import { Controller, Post, Body, Get, UseInterceptors, ClassSerializerIntercepto
 import { UserstatService } from './userstat.service';
 import { createUserDTO } from './dto/create-user.dto';
 import { userStat } from './interfaces/userstat.interface';
-import { userEntity } from './dto/create-user.entity';
 
 @Controller('userstat')
 export class UserstatController {
@@ -20,12 +19,12 @@ export class UserstatController {
 
     @UseInterceptors(ClassSerializerInterceptor)
     @Get('/showall')
-    async findAll(): Promise<userEntity> {
+    async findAll(): Promise<createUserDTO> {
         var ans = await this.userstatService.findAll();
         // var { name: { firstName, lastName }, username, status } = ans[0];
         // var obj = { name: { firstName, lastName }, username, status };
         var obj = JSON.parse(JSON.stringify(ans[1]));
-        const user = new userEntity(obj);
+        const user = new createUserDTO(obj);
         return user;
     }
     // findAll(): createUserDTO {
